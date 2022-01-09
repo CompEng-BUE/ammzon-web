@@ -1,0 +1,78 @@
+<div style="margin-bottom: 80px;">
+    <p-steps [model]="items" [activeIndex]="1"></p-steps>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <!-- margin: auto; -->
+        <div class="my-input">
+            <span class="p-float-label">
+                <input type="text" pInputText [(ngModel)]="x1" style="width: 100%;">
+                <!-- border-color: red; -->
+                <label>Full name <span style="color: red;">*</span></label>
+            </span>
+            <!-- <p class="p-error" style="font-size: small; visibility: visible;">Username is not available.</p> -->
+        </div>
+    
+        <div class="my-input">
+            <span class="p-float-label">
+                <input type="text" pInputText [(ngModel)]="x2" style="width: 100%;">
+                <label>Town/City <span style="color: red;">*</span></label>
+            </span>
+            <!-- <p class="p-error" style="font-size: small; visibility: visible;">Username is not available.</p> -->
+        </div>
+    
+        <div class="my-input">
+            <span class="p-float-label">
+                <input type="text" pInputText [(ngModel)]="x3" style="width: 100%;">
+                <label>Street Address <span style="color: red;">*</span></label>
+            </span>
+            <!-- <p class="p-error" style="font-size: small; visibility: visible;">Username is not available.</p> -->
+        </div>
+    
+        <div class="my-input">
+            <span class="p-float-label">
+                <input type="text" pInputText [(ngModel)]="x4" style="width: 100%;">
+                <label>Phone Number <span style="color: red;">*</span></label>
+            </span>
+            <!-- <p class="p-error" style="font-size: small; visibility: visible;">Username is not available.</p> -->
+        </div>
+    
+        <div class="my-input">
+            <span class="p-float-label">
+                <input type="text" pInputText [(ngModel)]="x5" style="width: 100%;">
+                <label>Email Address <span style="color: red;">*</span></label>
+            </span>
+            <!-- <p class="p-error" style="font-size: small; visibility: visible;">Username is not available.</p> -->
+        </div>
+    
+        <div class="my-input">
+            <span class="p-float-label">
+                <textarea pInputTextarea style="width: 100%; min-height: 150px; max-height: 150px;" [autoResize]="true"></textarea>
+                <label>Additional Notes</label>
+            </span>
+        </div>
+    </div>
+    <div class="col-6" style="padding: 0 40px;">
+        <p style="font-size: 24px; font-weight: lighter; text-align: center; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #dee2e6;">Shipping & Returns Policy</p>
+        
+        <div style="background-color: rgba(227, 242, 253, 0.8); height: 512px; padding: 30px;">
+            <!-- 512 + 20 for error-->
+            <p-scrollPanel [style]="{width: '100%', height: '100%'}">
+                <h6>Shipped and Home Delivery products:</h6>
+                You may have your product delivered to your home via one of our available home delivery options. We deliver orders on normal business days, which are Monday through Saturday excluding government holidays. You assume all risk of loss for shipped products. Order information such as billing or shipping address that is inaccurate or incomplete may result in delays. Products can not be shipped to incomplete addresses. In cases of not accepting the delivery for reasons other than wrong items, the customer agrees to pay the shipping charges incurred and specified on the invoice.
+                <h6 style="margin-top: 20px;">Shipping Charges:</h6>
+                All shipping charges are based on average package weight and dimension. This may be different from actual weights of products. Shipping charges can be computed while finalizing your order prior to completion.
+                <h6 style="margin-top: 20px;">Order Cancellations:</h6>
+                We are unable to refund any online purchase from the time your order is placed (when you click the Confirm Order button) until the product is received by you and returned to us. If you are not completely satisfied with your purchase after receiving your product, please review our returns policy.
+                <h6 style="margin-top: 20px;">Returns Policy:</h6>
+                If you are not completely satisfied with a product, RAM Electronics Company will gladly exchange or refund the purchase – at its own discretion – within 5 business days of the return request date, according to the notes below. Boxes and packing material have to be in the original condition and the product has to be unused and box unopened. All claims for shortages/ misshipments /misbillings must be made within 1 day of delivery. Returns are for replacement or merchandise credit only. The value shall not include any shipping charges. A copy of RAM Electonics invoice must be included with all returns. All items must be returned complete and in their original boxes or packages with all original parts/documentation; if items are not returned with their packages or if any other item or documentation is missing, products will not be accepted as a return item. All returns must be shipped freight prepaid, the customer is responsible for all freight and shipping charges.
+            </p-scrollPanel>
+        </div>
+    </div>
+</div>
+
+<div style="margin-top: 40px; display: flex; align-items: center; justify-content: space-between;">
+    <button pButton pRipple type="button" label="Back to cart" class="p-button-text" icon="pi pi-chevron-left" style="color: rgba(35, 48, 62, 0.8); font-weight: bold;" routerLink="/shop/cart"></button>
+    <button pButton pRipple type="button" label="Proceed to payment" class="p-button-text" icon="pi pi-chevron-right" iconPos="right" style="color: rgba(35, 48, 62, 0.8); font-weight: bold;" routerLink="/shop/payment"></button>
+</div>

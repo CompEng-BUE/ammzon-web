@@ -1,0 +1,10 @@
+<div style="margin-bottom: 80px;">
+    <p-steps [model]="items"></p-steps>
+</div>
+
+<app-data-view [products]="cart_products" layout="list" [show_header]="false" [product_detailed]="true" [rows]="cart_products.length" [alwaysShowPaginator]="false"></app-data-view>
+
+<div style="margin-top: 40px; display: flex; align-items: center; justify-content: space-between;">
+    <button pButton pRipple type="button" label="Back to shop" class="p-button-text" icon="pi pi-chevron-left" style="color: rgba(35, 48, 62, 0.8); font-weight: bold;" routerLink="/shop/home-page"></button>
+    <button pButton pRipple type="button" label="Proceed to shipping" class="p-button-text" icon="pi pi-chevron-right" iconPos="right" style="color: rgba(35, 48, 62, 0.8); font-weight: bold;" routerLink="/shop/shipping"></button>
+</div>

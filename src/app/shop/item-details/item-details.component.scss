@@ -1,0 +1,50 @@
+.INSTOCK {
+    color: rgb(37, 96, 41);
+    background-color: rgb(200, 230, 201);
+}
+
+.LOWSTOCK {
+    color: rgb(138, 83, 64);
+    background-color: rgb(254, 237, 175);
+}
+
+.OUTOFSTOCK {
+    color: rgb(198, 55, 55);
+    background-color: rgb(255, 205, 210);
+}
+
+.cart-button-1 {
+    color: black;
+    border: 2px solid rgb(240, 193, 75);
+    background-color: rgb(240, 193, 75);
+    font-weight: bold;
+    font-size: small;
+    margin-right: 3px;
+    width: 140px;
+    padding: 9px;
+}
+
+.cart-button-1:hover {
+    color: black;
+    border: 2px solid rgb(240, 193, 75);
+    background-color: rgb(237, 183, 39);
+}    
+
+.cart-button-1:active {
+    box-shadow: 0 0 5px 3px rgba(240, 193, 75, 0.5);
+}    
+
+.cart-button-2 {
+    display: inline-block;
+    border: 2px solid rgb(240, 193, 75);
+    border-radius: 3px;
+    // background-color: rgb(240, 193, 75);
+    font-weight: bold;
+    width: 140px;
+    margin-right: 3px;
+    text-align: center;
+}
+
+.cart-button-2:hover {
+    background-color: rgba(240, 193, 75, 0.08);
+}

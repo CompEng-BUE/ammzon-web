@@ -1,1 +1,39 @@
-<p>item-details works!</p>
+<div *ngIf="product">
+    <div class="row" style="margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid #dee2e6;">
+        <div class="col-5" style="border-right: 1px solid #dee2e6;">
+            <p-image [src]="'assets/' + product.img" alt="Image" width="100%" [preview]="true"></p-image>
+        </div>
+        <div class="col-7">
+            <p style="font-size: 40px; font-weight: lighter; margin-bottom: 0px; margin-top: 10px;">{{ product.name }}</p>
+            <i class="pi pi-tag" style="color: gray; margin-right: 5px;"></i>
+            <p style="font-size: 20px; font-weight: lighter; margin-bottom: 30px; display: inline-block; color: gray;">{{ product.category }}</p>
+            <p style="font-size: 20px; color: gray; margin-bottom: 30px;"> <span *ngIf="product.inventoryStatus != 'OUTOFSTOCK' && product.price_before" style="text-decoration: line-through; color: #AAAAAA;">{{product.price_before.toLocaleString('en', {useGrouping:true})}} EGP</span> {{product.price.toLocaleString('en', {useGrouping:true})}} EGP</p>
+            <div style="display: flex; justify-content: start;">
+                <p [class]="product.inventoryStatus" style="padding: 0px 5px; margin-right: 5px; margin-bottom: 40px;">{{ product.inventoryStatus }}</p>
+                <p *ngIf="product.inventoryStatus != 'OUTOFSTOCK' && product.price_before" class="INSTOCK" style="padding: 0px 5px; margin-right: 5px; margin-bottom: 40px;"> SALE! </p>
+            </div>
+            <div style="display: flex; justify-content: start;">
+                <div>
+                    <button *ngIf="get_count(product.id) <= 0" pButton pRipple type="button" label="Add to cart" class="cart-button-1" icon="pi pi-shopping-cart" iconPos="right" (click)="addToCart(product.id)" [disabled]="product.inventoryStatus === 'OUTOFSTOCK'"></button>
+                    <div *ngIf="get_count(product.id) > 0" class="cart-button-2">
+                        <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-sm p-button-rounded p-button-text p-button-warning" style="color: black;" (click)="minus(product.id)"></button>
+                        <div pButton pRipple type="button" class="p-button p-button-text" style="color: black; padding: 6px 15px;"> {{get_count(product.id)}} </div>
+                        <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-sm p-button-rounded p-button-text p-button-warning" style="color: black;" (click)="plus(product.id)"></button>
+                    </div>
+                </div>
+                <div><button pButton pRipple type="button" class="p-button-danger p-button-outlined" style="font-size: x-large; padding: 19px 2.5px 20.5px 10px; height: 39.5px; margin-left: 3px;" (click)="addToFav(product.id)">{{get_fav(product.id)?'♥':'♡'}}</button></div>
+            </div>
+            <!-- <p>description</p> -->
+        </div>
+    </div>
+</div>
+<div *ngIf="!product">
+    <p style="margin-bottom: 40px; padding-bottom: 40px; font-size: 40px; font-weight: lighter; text-align: center;">Opps! Product not found.</p>
+</div>
+
+<p style="font-size: 25px; font-weight: lighter; text-align: center; margin-bottom: 40px;">Related products</p>
+<app-data-view [products]="relatedProducts" layout="grid" [show_header]="false" [product_detailed]="false" [rows]="3"></app-data-view>
+
+
+
+

@@ -8,6 +8,11 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { MessageService } from 'primeng/api';
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
+import { DropdownModule } from 'primeng/dropdown';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
   declarations: [
@@ -21,9 +26,13 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
     ProgressSpinnerModule,
     ToastModule,
     ButtonModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    InputTextModule,
+    FormsModule,
+    DropdownModule,
+    MenuModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

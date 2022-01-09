@@ -1,0 +1,6 @@
+<p style="font-size: 30px; font-weight: lighter; text-align: center; margin-bottom: 60px; padding-bottom: 20px;  border-bottom: 1px solid #dee2e6;">Wishlist Items</p>
+<app-data-view [products]="wishlist_products" layout="list" [show_header]="false" [product_detailed]="true" [rows]="wishlist_products.length" [alwaysShowPaginator]="false"></app-data-view>
+
+<div style="margin-top: 40px; display: flex; align-items: center; justify-content: space-between;">
+    <button pButton pRipple type="button" label="Back to shop" class="p-button-text" icon="pi pi-chevron-left" style="color: rgba(35, 48, 62, 0.8); font-weight: bold;" routerLink="/shop/home-page"></button>
+</div>

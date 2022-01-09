@@ -1,0 +1,112 @@
+<p-dataView #dv [value]="products" [paginator]="true" [rows]="rows" filterBy="name" [sortField]="sortField"
+    [sortOrder]="sortOrder" [layout]="layout" [alwaysShowPaginator]="alwaysShowPaginator">
+    <ng-template *ngIf="show_header" pTemplate="header">
+        <div class="row align-items-center">
+            <div class="col">
+                <p-dropdown [options]="sortOptions" placeholder="Sort By Price" (onChange)="onSortChange($event)"
+                    styleClass="p-mb-2 p-mb-md-0"></p-dropdown>
+                    <button [class]="sorting == 0? 'sort-button-1': 'sort-button-2'" (click)="changeSorting()"><i [class]="getSortingIcon(sorting)"></i>
+                    </button>
+                    </div>
+            <div class="col" style="text-align: end;" *ngIf="show_header">
+                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template let-product pTemplate="listItem">
+        <div class="p-col-12">
+            <div class="product-list-item">
+                <button style="background-color: transparent; border: 0px;"
+                    [routerLink]="['/shop/item-details', product.id]">
+                    <img [src]="'assets/' + product.img" [alt]="product.name" />
+                </button>
+                <button class="product-list-detail" [routerLink]="['/shop/item-details', product.id]">
+                    <div class="product-name">{{product.name}}</div>
+                    <div class="product-description">{{product.description}}</div>
+                    <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"
+                        [iconOnStyle]="{color: 'rgb(251, 192, 45)'}" [iconOffStyle]="{color: 'rgb(251, 192, 45)'}">
+                    </p-rating>
+                    <span [class]="product.inventoryStatus">{{product.inventoryStatus}}</span>
+                </button>
+                <div class="product-list-action">
+                    <span class="product-price"><span
+                            *ngIf="product.inventoryStatus != 'OUTOFSTOCK' && product.price_before"
+                            style="text-decoration: line-through; color: #AAAAAA;">{{product.price_before.toLocaleString('en',
+                            {useGrouping:true})}} EGP</span> {{product.price.toLocaleString('en', {useGrouping:true})}}
+                        EGP</span>
+                    <div style="display: flex; justify-content: end; ">
+                        <div>
+                            <button *ngIf="get_count(product.id) <= 0" pButton pRipple type="button" label="Add to cart"
+                                class="cart-button-1" icon="pi pi-shopping-cart" iconPos="right"
+                                (click)="addToCart(product.id)"
+                                [disabled]="product.inventoryStatus === 'OUTOFSTOCK'"></button>
+                            <div *ngIf="get_count(product.id) > 0" class="cart-button-2">
+                                <button pButton pRipple type="button" icon="pi pi-minus"
+                                    class="p-button-sm p-button-rounded p-button-text p-button-warning"
+                                    style="color: black;" (click)="minus(product.id)"></button>
+                                <div pButton pRipple type="button" class="p-button p-button-text"
+                                    style="color: black; padding: 6px 15px;"> {{get_count(product.id)}} </div>
+                                <button pButton pRipple type="button" icon="pi pi-plus"
+                                    class="p-button-sm p-button-rounded p-button-text p-button-warning"
+                                    style="color: black;" (click)="plus(product.id)"></button>
+                            </div>
+                        </div>
+                        <div><button pButton pRipple type="button" class="p-button-danger p-button-outlined"
+                                style="font-size: x-large; padding: 19px 2.5px 20.5px 10px; height: 39.5px; margin-left: 3px;"
+                                (click)="addToFav(product.id)">{{get_fav(product.id)?'♥':'♡'}}</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template let-product pTemplate="gridItem">
+        <div class="col-4" style="display: inline-block; padding: 16px 8px;">
+            <div class="product-grid-item card" [style]="!product_detailed? 'border:0px': ''">
+                <button *ngIf="product_detailed" class="product-grid-item-top"
+                    [routerLink]="['/shop/item-details', product.id]">
+                    <span [class]="product.inventoryStatus">{{product.inventoryStatus}}</span>
+                    <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"
+                        [iconOnStyle]="{color: 'rgb(251, 192, 45)'}" [iconOffStyle]="{color: 'rgb(251, 192, 45)'}">
+                    </p-rating>
+                </button>
+                <button class="product-grid-item-content" [routerLink]="['/shop/item-details', product.id]">
+                    <div class="img-container">
+                        <img [src]="'assets/' + product.img" [alt]="product.name" />
+                    </div>
+                    <div class="product-name">{{product.name}}</div>
+                    <div class="product-description">{{product.description}}</div>
+                    <div style="font-weight: lighter;"><span
+                            *ngIf="product.inventoryStatus != 'OUTOFSTOCK' && product.price_before"
+                            style="text-decoration: line-through; color: #AAAAAA;">{{product.price_before.toLocaleString('en',
+                            {useGrouping:true})}} EGP</span> {{product.price.toLocaleString('en', {useGrouping:true})}}
+                        EGP</div>
+                </button>
+                <div class="product-grid-item-bottom">
+                    <div>
+                        <button *ngIf="get_count(product.id) <= 0" pButton pRipple type="button" label="Add to cart"
+                            class="cart-button-1" icon="pi pi-shopping-cart" iconPos="right"
+                            (click)="addToCart(product.id)"
+                            [disabled]="product.inventoryStatus === 'OUTOFSTOCK'"></button>
+                        <div *ngIf="get_count(product.id) > 0" class="cart-button-2">
+                            <button pButton pRipple type="button" icon="pi pi-minus"
+                                class="p-button-sm p-button-rounded p-button-text p-button-warning"
+                                style="color: black;" (click)="minus(product.id)"></button>
+                            <div pButton pRipple type="button" class="p-button p-button-text"
+                                style="color: black; padding: 6px 15px;"> {{get_count(product.id)}} </div>
+                            <button pButton pRipple type="button" icon="pi pi-plus"
+                                class="p-button-sm p-button-rounded p-button-text p-button-warning"
+                                style="color: black;" (click)="plus(product.id)"></button>
+                        </div>
+                    </div>
+                    <div><button pButton pRipple type="button" class="p-button-danger p-button-outlined"
+                            style="font-size: x-large; padding: 19px 2.5px 20.5px 10px; height: 39.5px; margin-left: 3px;"
+                            (click)="addToFav(product.id)">{{get_fav(product.id)?'♥':'♡'}}</button></div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-dataView>
+
+<p-toast></p-toast>
